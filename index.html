@@ -3,9 +3,21 @@
 <head>
 	<meta charset="utf-8" />
     <link href="css/style.css" rel="stylesheet" />
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.js"></script>
+    <script src="js/tmpl.js" type="text/javascript"></script>
+    <script src="js/script.js" type="text/javascript"></script>
 	<title>Homework js13-14</title>
 </head>
 <body>
-    
+    <script type="text/template" id="my-block__script">
+            <% for (var i = 0; i < data.length; i++) {%>
+            <h2><%= data[i].question %></h2>
+            <form id="form-block">
+                   <input type="checkbox" name="answerFirst" value="1"><%= data[i].answer %>
+                   <input type="checkbox" name="answerSecond" value="2"><%= data[i].answer %>
+                   <input type="checkbox" name="answerThird" value="3"><%= data[i].answer %>
+            </form>
+            <% } %>
+        </script>
 </body>
 </html>
