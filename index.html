@@ -9,15 +9,21 @@
 	<title>Homework js13-14</title>
 </head>
 <body>
+    <div class="script-block">
     <script type="text/template" id="my-block__script">
             <% for (var i = 0; i < data.length; i++) {%>
-            <h2><%= data[i].question %></h2>
             <form id="form-block">
-                   <input type="checkbox" name="answerFirst" value="1"><%= data[i].answer %>
-                   <input type="checkbox" name="answerSecond" value="2"><%= data[i].answer %>
-                   <input type="checkbox" name="answerThird" value="3"><%= data[i].answer %>
+                <h2><%= data[i].question %></h2>
+                <ul>
+                    <li><input type="radio" name="answerFirst" value="1"><%= data[i].answer[0] %></li>
+                    <li><input type="radio" name="answerFirst" value="2"><%= data[i].answer[1] %></li>
+                    <li><input type="radio" name="answerFirst" value="3"><%= data[i].answer[2] %></li>
+                </ul>
             </form>
-            <% } %>
-        </script>
+            <% }; %>
+    </script>
+    </div>
+    <button id="check-result">Проверить ответы</button>
+    <div id="selected"></div>
 </body>
 </html>
