@@ -39,6 +39,19 @@ $(function(){
 	 
 	$('.script-block').append(quest);
 
+	$('#check-result').on('click', function () {
+
+			var check = $("input:radio:checked");
+
+			for (var i = 0; i < check.length; i++ ){
+            
+   			console.log(check.val());
+
+		}
+
+
+
+    })
 
     // blockQuestion.question[0].answer[blockQuestion.question[0].correct]
 });
