@@ -10,20 +10,105 @@
 </head>
 <body>
     <div class="script-block">
-    <script type="text/template" id="my-block__script">
-            <% for (var i = 0; i < data.length; i++) {%>
-            <form id="form-block">
-                <h2><%= data[i].question %></h2>
-                <ul>
-                    <li><input type="radio" name="answerFirst" value="1"><%= data[i].answer[0] %></li>
-                    <li><input type="radio" name="answerFirst" value="2"><%= data[i].answer[1] %></li>
-                    <li><input type="radio" name="answerFirst" value="3"><%= data[i].answer[2] %></li>
-                </ul>
-            </form>
-            <% }; %>
+
+    <script type="text/javascript">
+
+        
+        var blockQuestion = {
+            title: "Тест по программированию",
+            questions: ["Вопрос №1","Вопрос №2","Вопрос №3"],
+            answers : [
+                ["Вариант ответа №1","Вариант ответа №2","Вариант ответа №3"],
+                ["Вариант ответа №1","Вариант ответа №2","Вариант ответа №3"],
+                ["Вариант ответа №1","Вариант ответа №2","Вариант ответа №3"]
+            ],
+            right:[1,2,1],
+         };
+
+
+    // var quest = tmpl(myBlock, { 
+    //  data: blockQuestion
+    //  });
+     
+    // $('.script-block').append(quest);
+
+    var strBlock = JSON.stringify(blockQuestion);
+    
+    localStorage.setItem("str", strBlock);
+
+    strBlock = localStorage.getItem("str");
+    // console.log(strBlock);
+
+    var genBlock = JSON.parse(strBlock)
+    console.log(genBlock);
+
+    // var quest = tmpl(myBlock, {
+    //     data: genBlock
+    // });
+     
+    // $('.script-block').append(quest);
+
+    $(function(){
+        var results = document.getElementById("results");
+        results.innerHTML = tmpl("item_tmpl", genBlock);
+    });
+
     </script>
+
+    <ul id="results"></ul>
+
+
+    <script type="text/html" id="item_tmpl">
+
+        <% for(var i=0;i<questions.length;i++){%>
+        <li><%=questions[i]%> </li> 
+        <ul>
+            <% for(var j=0;j<answers[i].length;j++){%>
+            <li id =a<%=i%><%=j%>><input type = radio id =<%=i%><%=j%>a name = a<%=i%> >№<%=j+1%> <%=answers[i][j]%></li> 
+            <% } %>
+        </ul>
+        <% } %>
+    
+    </script>
+
+<a href="#open-modal" id = "send">Проверить резельтаты</a>
+
+<div class="modal" id="open-modal">
+    <div class="modal-container">
+        <p id="alert-block"></p>
+        <a href="#modal-close">Close</a>
     </div>
-    <button id="check-result">Проверить ответы</button>
-    <div id="selected"></div>
+</div>
+
+
+
+<script>
+    $(send).click(function(e){
+        $('#alert-block').empty();
+        var sum=0;
+        $("#results input:checked").each(function(){
+            var code = $(this).attr("id");
+            code = parseInt(code);
+            var q = Math.floor(code/10);
+            var qn = code%10;
+            
+            if (genBlock.right[q]==qn) {console.log('ok'); sum+=1;}
+            
+            
+        });
+        if (sum == genBlock.right.length) {
+            var allGood = "Вы ответели правильно";
+            $('#alert-block').append(allGood);
+        }
+        else
+            var allBad = "Вы ответели не правильно";
+            $('#alert-block').append(allBad);
+            
+    });
+</script>
+
+    </div>
+    
+  
 </body>
 </html>
