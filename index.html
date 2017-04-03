@@ -12,7 +12,7 @@
     <div class="script-block">
 
     <script type="text/javascript">
-
+'use strict';
         
         var blockQuestion = {
             title: "Тест по программированию",
@@ -40,7 +40,6 @@
     // console.log(strBlock);
 
     var genBlock = JSON.parse(strBlock)
-    console.log(genBlock);
 
     // var quest = tmpl(myBlock, {
     //     data: genBlock
@@ -76,7 +75,8 @@
 <div class="modal" id="open-modal">
     <div class="modal-container">
         <p id="alert-block"></p>
-        <a href="#modal-close">Close</a>
+        <a href="#" id="close-modal">Закрыть</a>
+        <a href="#modal-close" id="close-modal">Проийти еще раз</a>
     </div>
 </div>
 
@@ -92,19 +92,30 @@
             var q = Math.floor(code/10);
             var qn = code%10;
             
-            if (genBlock.right[q]==qn) {console.log('ok'); sum+=1;}
+            if (genBlock.right[q]==qn) {sum+=1;}
+             res = genBlock.right[q] - qn;
+            console.log(res);
             
-            
+
         });
         if (sum == genBlock.right.length) {
             var allGood = "Вы ответели правильно";
             $('#alert-block').append(allGood);
+
         }
-        else
-            var allBad = "Вы ответели не правильно";
+        // else if(res == 0) {sum+=1;}{
+           
+        // }
+        else {
+            var allBad = "Вы ответели не правильно " + " на " + (genBlock.right.length - sum) + " вопроса ";
             $('#alert-block').append(allBad);
-            
+           }
+
     });
+    $('#close-modal').click(function(){
+        $('input:checked').prop('checked', false);
+    })
+    
 </script>
 
     </div>
