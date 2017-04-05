@@ -15,7 +15,6 @@
 'use strict';
         
         var blockQuestion = {
-            title: "Тест по программированию",
             questions: ["Вопрос №1","Вопрос №2","Вопрос №3"],
             answers : [
                 ["Вариант ответа №1","Вариант ответа №2","Вариант ответа №3"],
@@ -112,8 +111,9 @@
            }
 
     });
-    $('#close-modal').click(function(){
+    $('a').click(function(){
         $('input:checked').prop('checked', false);
+        $('form').trigger( 'reset' );
     })
     
 </script>
